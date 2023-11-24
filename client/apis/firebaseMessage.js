@@ -20,26 +20,30 @@ export const deleteFCMTokenInFirebase = () => {
   })
 }
 
-export const notificationListener = () => {
+export const notificationListener = (callback) => {
   messaging().onNotificationOpenedApp(remoteMessage => {
     console.log(
       'Notification caused app to open from background state:',
-      remoteMessage.notification,
+      remoteMessage,
     );
+    callback(remoteMessage.data.roomUID);
     // navigation.navigate(remoteMessage.data.type);
   });
 
   // Check whether an initial notification is available
   messaging()
     .getInitialNotification()
-    .then(remoteMessage => {
-      if (remoteMessage) {
+    .then((RemoteMessage) => {
+      console.log('exit msg : ',RemoteMessage)
+      if (RemoteMessage) {
+        callback(remoteMessage.data.roomUID);
         console.log(
           'Notification caused app to open from quit state:',
-          remoteMessage.notification,
+          RemoteMessage.notification,
         );
       }
     });
+    
 }
 
 
@@ -59,6 +63,8 @@ export const sendNotification = async (message, roomUID) => {
   const FCMTokens = await getMemberFCMTokens(roomUID);
   const myUID = getUser().uid;
   const myData = await firestore().collection('user').doc(myUID).get();
+  const roomData = await firestore().collection('chat').doc(roomUID).get();
+  const roomTitle = roomData.data().title;
   const myName = myData.data().name;
   console.log(myName)
   FCMTokens.forEach(t => {
@@ -72,11 +78,15 @@ export const sendNotification = async (message, roomUID) => {
       body : JSON.stringify({
         "to": `${t}`,
         "notification": {
-          "title": `${myName}`,
-          "body": `${message.trim() !== ''? message : '사진'}`,
+          "title": `${roomTitle}`,
+          "body": `${myName} : ${message.trim() !== ''? message : '사진'}`,
           "mutable_content": true,
-          "sound": 'Tri-tone'
-          }
+          "sound": roomUID
+          },
+        "data" : {
+          "roomUID" : roomUID
+        },
+        "priority" : 'high'
       })
     })
     .catch(e => console.log(e))

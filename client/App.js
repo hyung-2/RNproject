@@ -44,9 +44,13 @@ function App({
   const [isLogin, setIsLogin] = useState(false);
   const [selectRoomId, setSelectRoomId] = useState('');
 
+  const backOrExitStateClickNotification = async (chatRoomUID) => {
+    Alert.alert('bbb')
+  }
+
   useEffect(() => {
     requestUserPermission();
-    notificationListener();
+    notificationListener(backOrExitStateClickNotification);
     if (getUser() !== null) getToken();
   }, [])
 
