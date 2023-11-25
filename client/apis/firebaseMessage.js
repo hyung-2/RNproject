@@ -36,7 +36,7 @@ export const notificationListener = (callback) => {
     .then((RemoteMessage) => {
       console.log('exit msg : ',RemoteMessage)
       if (RemoteMessage) {
-        callback(remoteMessage.data.roomUID);
+        callback(RemoteMessage.data.roomUID);
         console.log(
           'Notification caused app to open from quit state:',
           RemoteMessage.notification,
