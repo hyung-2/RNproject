@@ -71,6 +71,7 @@ function SnsLogin({
     setIsGoogleLogin(false);
     // 카카오 로그인 웹뷰로 이동
     try {
+      // const response = await fetch(`${academyIP}/kakaoLogin`, {
       const response = await fetch(`https://port-0-rnproject-server-5mk12alpawtk1g.sel5.cloudtype.app/kakaoLogin`, {
         cache: 'no-store',
       });
@@ -87,6 +88,7 @@ function SnsLogin({
     // 네이버 로그인 웹뷰로 이동
     const getNaverLoginLink = async () => {
       try {
+        // const response = await fetch(`${academyIP}/naverLogin`, {
         const response = await fetch(`https://port-0-rnproject-server-5mk12alpawtk1g.sel5.cloudtype.app/naverLogin`, {
           cache: 'no-store',
         });
