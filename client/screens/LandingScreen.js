@@ -1,23 +1,9 @@
 import React, { useState} from 'react';
-import {SafeAreaView, StyleSheet, ImageBackground} from 'react-native';
+import {SafeAreaView, StyleSheet } from 'react-native';
 import {FindPassword, Login, RegisterUser} from '../components';
 
 function LandingScreen({
   navigation,
-  // setNaverLoginLink,
-  // naverLoginLink,
-  // isSnsLogin,
-  // setIsSnsLogin,
-  // kakaoLoginLink,
-  // setKakaoLoginLink,
-  // isKakaoLogin,
-  // setIsKakaoLogin,
-  // isNaverLogin,
-  // setIsNaverLogin,
-  // isGoogleLogin,
-  // setIsGoogleLogin,
-  appState,
-  setAppState,
 }) {
   const [loginInfo, setLoginInfo] = useState({
     email: '',
@@ -41,7 +27,6 @@ function LandingScreen({
 
   return (
     <SafeAreaView style={styles.container}>
-      {/* <ImageBackground source={require('../assets/imgs/winter.jpg')} resizeMode='cover' style={styles.image}> */}
       {isFindPassword ? (
         <FindPassword
           email={email}
@@ -56,7 +41,6 @@ function LandingScreen({
         <RegisterUser
           isFindPassword={isFindPassword}
           setIsFindPassword={setIsFindPassword}
-          // setIsSnsLogin={setIsSnsLogin}
           findEmail={findEmail}
           navigation={navigation}
           isRegister={isRegister}
@@ -73,23 +57,8 @@ function LandingScreen({
           setLoginInfo={setLoginInfo}
           setIsFindPassword={setIsFindPassword}
           setIsRegister={setIsRegister}
-          // setNaverLoginLink={setNaverLoginLink}
-          // naverLoginLink={naverLoginLink}
-          // kakaoLoginLink={kakaoLoginLink}
-          // setKakaoLoginLink={setKakaoLoginLink}
-          // isSnsLogin={isSnsLogin}
-          // setIsSnsLogin={setIsSnsLogin}
-          // isKakaoLogin={isKakaoLogin}
-          // setIsKakaoLogin={setIsKakaoLogin}
-          // isNaverLogin={isNaverLogin}
-          // setIsNaverLogin={setIsNaverLogin}
-          // isGoogleLogin={isGoogleLogin}
-          // setIsGoogleLogin={setIsGoogleLogin}
-          setAppState={setAppState}
-          appState= {appState}
         />
       )}
-      {/* </ImageBackground> */}
     </SafeAreaView>
   );
 }
@@ -102,7 +71,6 @@ const styles = StyleSheet.create({
   },
   image: {
     flex: 1,
-    // justifyContent: "center"
   }
 });
 
